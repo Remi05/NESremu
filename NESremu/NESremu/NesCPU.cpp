@@ -592,7 +592,7 @@ namespace NesCPU
 	void PLA()
 	{
 		A = pull8();
-		checkNegative(A);
+		checkNegative(A); 
 		checkZero(A);
 	}
 
