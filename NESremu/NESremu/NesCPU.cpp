@@ -642,12 +642,13 @@ namespace NesCPU
 	void printCpuLog()
 	{
 		*g_cpuLogStream << std::hex
-						<< "A: "   << A		  << " "
-						<< "X: "   << X		  << " "
-						<< "Y: "   << Y		  << " "
-						<< "P: "   << P		  << " "
-						<< "SP: "  << SP	  << " "
-						<< "CYC: " << g_ticks << std::endl;
+                        << "A: "   << A       << " "
+                        << "X: "   << X       << " "
+                        << "Y: "   << Y       << " "
+                        << "P: "   << P       << " "
+                        << "SP: "  << SP      << " "
+                        << "CYC: " << g_ticks << std::endl;
 	}
 
 }
+
