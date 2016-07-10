@@ -456,50 +456,58 @@ namespace NesCPU
     //--Branch--
     void BCS()
     {
-        if (P & FLAG_CARRY)
+        if (P & FLAG_CARRY) {
             PC = --PC + *(int8_t*)g_srcPtr;
+        }
     }
 
     void BCC()
     {
-        if (!(P & FLAG_CARRY))
+        if (!(P & FLAG_CARRY)) {
             PC = --PC + *(int8_t*)g_srcPtr;
+        }
     }
 
     void BEQ()
     {
-        if (P & FLAG_ZERO)
+        if (P & FLAG_ZERO) {
             PC = --PC + *(int8_t*)g_srcPtr;
+        }
     }
 
     void BNE()
     {
-        if (!(P & FLAG_ZERO))
+        if (!(P & FLAG_ZERO)) {
             PC = --PC + *(int8_t*)g_srcPtr;
+        }
     }
 
     void BMI()
     {
-        if (P & FLAG_NEGATIVE)
+        if (P & FLAG_NEGATIVE) {
             PC = --PC + *(int8_t*)g_srcPtr;
+        }
     }
 
     void BPL()
     {
-        if (!(P & FLAG_NEGATIVE))
+        if (!(P & FLAG_NEGATIVE)) {
             PC = --PC + *(int8_t*)g_srcPtr;
+        }
     }
 
     void BVS()
     {
-        if (P & FLAG_OVERFLOW)
+        if (P & FLAG_OVERFLOW) {
             PC = --PC + *(int8_t*)g_srcPtr;
+        }
     }
 
     void BVC()
     {
-        if (!(P & FLAG_OVERFLOW))
+        if (!(P & FLAG_OVERFLOW)) {
             PC = --PC + *(int8_t*)g_srcPtr;
+        }
     }
 
 
