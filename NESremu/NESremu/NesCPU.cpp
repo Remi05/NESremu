@@ -124,6 +124,11 @@ namespace NesCPU
 		OpcodesTable[opcode]();
 		g_ticks += TicksTable[opcode] + g_tickOffset;
 		//...
+
+		//Debugging
+		if (g_cpuLogEnabled) {
+			printCpuLog();
+		}
 	}
 
 
@@ -142,48 +147,47 @@ namespace NesCPU
 	//Stack operations
 	uint8_t  pull8()
 	{
-		return Stack[++S];
+		return Stack[++SP];
 	}
 
 	uint16_t pull16()
 	{
-		return *((uint16_t*)Stack + (S += 2));
+		return *((uint16_t*)Stack + (SP += 2));
 	}
 
 	void push8(uint8_t value)
 	{
-		Stack[S--] = value;
+		Stack[SP--] = value;
 	}
 
 	void push16(uint16_t value)
 	{
 		//Check if good byte order
-		*((uint16_t*)Stack + S) = value;
-		S -= 2;
+		*((uint16_t*)Stack + SP) = value;
+		SP -= 2;
 	}
 
 
 
 	//Addressing modes
 
-	//TO DO: Write Indirect, X (indx) and Indirect, Y (indy) addressing mode functions.
 	//TO DO: Add tick offset.
 
 	void abs()
 	{
-		g_srcPtr = Memory + *((uint16_t*)Memory + PC);
+		g_srcPtr = Memory + *((uint16_t*)(Memory + PC));
 		PC += 2;
 	}
 
 	void absx()
 	{
-		g_srcPtr = Memory + *((uint16_t*)Memory + PC) + X;
+		g_srcPtr = Memory + *((uint16_t*)(Memory + PC)) + X;
 		PC += 2;
 	}
 
 	void absy()
 	{
-		g_srcPtr = Memory + *((uint16_t*)Memory + PC) + Y;
+		g_srcPtr = Memory + *((uint16_t*)(Memory + PC)) + Y;
 		PC += 2;
 	}
 
@@ -202,16 +206,19 @@ namespace NesCPU
 	void ind()
 	{
 		g_srcPtr = Memory + PC;
+		PC += 2;
 	}
 
 	void indx()
 	{
-
+		uint16_t tmpAddr = Memory[(Memory[PC] + X) & 0x00FF] | (Memory[(Memory[PC++] + X + 1) & 0x00FF] << 8);
+		g_srcPtr = Memory + tmpAddr;
 	}
 
 	void indy()
 	{
-
+		uint16_t tmpAddr = Memory[Memory[PC]] | (Memory[(Memory[PC++] + 1) & 0x00FF] << 8);
+		g_srcPtr = Memory + tmpAddr + Y;
 	}
 
 	void rel()
@@ -305,16 +312,16 @@ namespace NesCPU
 
 	void TSX()
 	{
-		X = S;
+		X = SP;
 		checkNegative(X);
 		checkZero(X);
 	}
 
 	void TXS()
 	{
-		S = X;
-		checkNegative(S);
-		checkZero(S);
+		SP = X;
+		checkNegative(SP);
+		checkZero(SP);
 	}
 
 
@@ -504,13 +511,13 @@ namespace NesCPU
 
 	void JSR()
 	{
-		push16(PC + 2); //Push next instruction
+		push16(PC); //Push next instruction
 		PC = *(uint16_t*)g_srcPtr;
 	}
 
 	void RTI()
 	{
-		P = pull8();
+		P  = pull8();
 		PC = pull16();
 	}
 
@@ -592,7 +599,7 @@ namespace NesCPU
 	void PLA()
 	{
 		A = pull8();
-		checkNegative(A); 
+		checkNegative(A);
 		checkZero(A);
 	}
 
@@ -611,6 +618,36 @@ namespace NesCPU
 	void NOP()
 	{
 		//Waist cycle
+	}
+
+
+
+
+	//Debugging
+	void enableCpuLog()
+	{
+		g_cpuLogEnabled = true;
+	}
+
+	void disableCpuLog()
+	{
+		g_cpuLogEnabled = false;
+	}
+
+	void setCpuLogStream(std::ostream& logStream)
+	{
+		g_cpuLogStream = &logStream;
+	}
+
+	void printCpuLog()
+	{
+		*g_cpuLogStream << std::hex
+						<< "A: "   << A		  << " "
+						<< "X: "   << X		  << " "
+						<< "Y: "   << Y		  << " "
+						<< "P: "   << P		  << " "
+						<< "SP: "  << SP	  << " "
+						<< "CYC: " << g_ticks << std::endl;
 	}
 
 }
