@@ -2,5 +2,5 @@
 
 namespace NesAPU
 {
-	//TO DO: Emulate APU.
+    //TO DO: Emulate APU.
 }
