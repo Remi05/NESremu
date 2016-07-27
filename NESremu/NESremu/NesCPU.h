@@ -16,22 +16,22 @@ namespace NesCPU
     
     //Memory
     std::uint8_t   Memory[0x10000];                               //$0000-$FFFF
-    std::uint8_t*  ZeroPage         = Memory;                     //$0000–$00FF
-    std::uint8_t*  Stack            = Memory + 0x0100;            //$0100–$01FF
-    std::uint8_t*  InternalRAM      = Memory + 0x0200;            //$0200–$07FF -> $0000-$07FF, mirrored at $0800-$0FFF, $1000-$17FF, $1800-$1FFF
+    std::uint8_t*  ZeroPage         = Memory;                     //$0000â€“$00FF
+    std::uint8_t*  Stack            = Memory + 0x0100;            //$0100â€“$01FF
+    std::uint8_t*  InternalRAM      = Memory + 0x0200;            //$0200â€“$07FF -> $0000-$07FF, mirrored at $0800-$0FFF, $1000-$17FF, $1800-$1FFF
     std::uint8_t*  PpuRegisters     = Memory + 0x2000;            //$2000-$2007, mirrored through $2008-$3FFF every 8 bytes
     std::uint8_t*  ApuRegisters     = Memory + 0x4000;            //$4000-$401F, except $4014,$4016,$4017
     std::uint8_t*  DmaSpriteMem     = Memory + 0x4014;            //$4014
     std::uint8_t*  Controller1      = Memory + 0x4016;            //$4016
     std::uint8_t*  Controller2      = Memory + 0x4017;            //$4017
-    std::uint8_t*  ExpansionROM     = Memory + 0x4020;            //$4020–$5FFF
-    std::uint8_t*  SaveRAM          = Memory + 0x6000;            //$6000–$7FFF
-    std::uint8_t*  PrgROM           = Memory + 0x8000;            //$8000–$FFFF
-    std::uint16_t* NmiVectorAddr    = (uint16_t*)Memory + 0xFFFA; //$FFFA–$FFFB
-    std::uint16_t* ResetVectorAddr  = (uint16_t*)Memory + 0xFFFC; //$FFFC–$FFFD
-    std::uint16_t* BrkVectorAddr    = (uint16_t*)Memory + 0xFFFE; //$FFFE–$FFFF
+    std::uint8_t*  ExpansionROM     = Memory + 0x4020;            //$4020â€“$5FFF
+    std::uint8_t*  SaveRAM          = Memory + 0x6000;            //$6000â€“$7FFF
+    std::uint8_t*  PrgROM           = Memory + 0x8000;            //$8000â€“$FFFF
+    std::uint16_t* NmiVectorAddr    = (uint16_t*)Memory + 0xFFFA; //$FFFAâ€“$FFFB
+    std::uint16_t* ResetVectorAddr  = (uint16_t*)Memory + 0xFFFC; //$FFFCâ€“$FFFD
+    std::uint16_t* BrkVectorAddr    = (uint16_t*)Memory + 0xFFFE; //$FFFEâ€“$FFFF
 
-    //Status register pointers
+    //Status register flags
     enum StatusFlags
     {
         FLAG_CARRY             = 0x01,
