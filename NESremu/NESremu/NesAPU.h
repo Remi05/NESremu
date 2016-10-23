@@ -1,6 +1,10 @@
 #pragma once
 
-namespace NesAPU
+namespace NESremu
 {
     //TO DO: Emulate APU.
+    class NesApu
+    {
+
+    };
 }

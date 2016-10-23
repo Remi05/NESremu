@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NesAPU.h" />
+    <ClInclude Include="NesBus.h" />
     <ClInclude Include="NesController.h" />
     <ClInclude Include="NesCPU.h" />
     <ClInclude Include="NesEmu.h" />

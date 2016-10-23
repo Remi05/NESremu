@@ -1,26 +1,27 @@
 #include "NesCpu.h"
 
-namespace NesCPU
+
+namespace NESremu
 {
     //Tables
-    void (*AddrModesTable[256])() = {
-        /* 0xVH  0    1     2    3    4    5    6    7    8    9     A    B    C     D     E     F  */
-        /* 0 */  imp, indx, imp, imp, imp, zp,  zp,  imp, imp, imm,  acc, imp, imp,  abs,  abs,  imp,
-        /* 1 */  rel, indy, imp, imp, imp, zpx, zpx, imp, imp, absy, imp, imp, imp,  absx, absx, imp,
-        /* 2 */  abs, indx, imp, imp, zp,  zp,  zp,  imp, imp, imm,  acc, imp, abs,  abs,  abs,  imp,
-        /* 3 */  rel, indy, imp, imp, imp, zpx, zpx, imp, imp, absy, imp, imp, imp,  absx, absx, imp,
-        /* 4 */  imp, indx, imp, imp, imp, zp,  zp,  imp, imp, imm,  acc, imp, abs,  abs,  abs,  imp,
-        /* 5 */  rel, indy, imp, imp, imp, zpx, zpx, imp, imp, absy, imp, imp, imp,  absx, absx, imp,
-        /* 6 */  imp, indx, imp, imp, imp, zp,  zp,  imp, imp, imm,  acc, imp, ind,  abs,  abs,  imp,
-        /* 7 */  rel, indy, imp, imp, imp, zpx, zpx, imp, imp, absy, imp, imp, imp,  absx, absx, imp,
-        /* 8 */  imp, indx, imp, imp, zp,  zp,  zp,  imp, imp, imp,  imp, imp, abs,  abs,  abs,  imp,
-        /* 9 */  rel, indy, imp, imp, zpx, zpx, zpy, imp, imp, absy, imp, imp, imp,  absx, imp,  imp,
-        /* A */  imm, indx, imm, imp, zp,  zp,  zp,  imp, imp, imm,  imp, imp, abs,  abs,  abs,  imp,
-        /* B */  rel, indy, imp, imp, zpx, zpx, zpy, imp, imp, absy, imp, imp, absx, absx, absy, imp,
-        /* C */  imm, indx, imp, imp, zp,  zp,  zp,  imp, imp, imm,  imp, imp, abs,  abs,  abs,  imp,
-        /* D */  rel, indy, imp, imp, imp, zpx, zpx, imp, imp, absy, imp, imp, imp,  absx, absx, imp,
-        /* E */  imm, indx, imp, imp, zp,  zp,  zp,  imp, imp, imm,  imp, imp, abs,  abs,  abs,  imp,
-        /* F */  rel, indy, imp, imp, imp, zpx, zpx, imp, imp, absy, imp, imp, imp,  absx, absx, imp };
+    NesCpu::AddressingMode NesCpu::AddrModesTable[256] = {
+        /* 0xVH  0     1     2    3    4    5    6    7    8    9     A    B    C     D     E     F  */
+        /* 0 */  &imp,  &indx, &imp, &imp, &imp, &zp,  &zp,  &imp, &imp, &imm,  &acc, &imp, &imp,  &absl, &absl, &imp,
+        /* 1 */  &rel,  &indy, &imp, &imp, &imp, &zpx, &zpx, &imp, &imp, &absy, &imp, &imp, &imp,  &absx, &absx, &imp,
+        /* 2 */  &absl, &indx, &imp, &imp, &zp,  &zp,  &zp,  &imp, &imp, &imm,  &acc, &imp, &absl, &absl, &absl, &imp,
+        /* 3 */  &rel,  &indy, &imp, &imp, &imp, &zpx, &zpx, &imp, &imp, &absy, &imp, &imp, &imp,  &absx, &absx, &imp,
+        /* 4 */  &imp,  &indx, &imp, &imp, &imp, &zp,  &zp,  &imp, &imp, &imm,  &acc, &imp, &absl, &absl, &absl, &imp,
+        /* 5 */  &rel,  &indy, &imp, &imp, &imp, &zpx, &zpx, &imp, &imp, &absy, &imp, &imp, &imp,  &absx, &absx, &imp,
+        /* 6 */  &imp,  &indx, &imp, &imp, &imp, &zp,  &zp,  &imp, &imp, &imm,  &acc, &imp, &ind,  &absl, &absl, &imp,
+        /* 7 */  &rel,  &indy, &imp, &imp, &imp, &zpx, &zpx, &imp, &imp, &absy, &imp, &imp, &imp,  &absx, &absx, &imp,
+        /* 8 */  &imp,  &indx, &imp, &imp, &zp,  &zp,  &zp,  &imp, &imp, &imp,  &imp, &imp, &absl, &absl, &absl, &imp,
+        /* 9 */  &rel,  &indy, &imp, &imp, &zpx, &zpx, &zpy, &imp, &imp, &absy, &imp, &imp, &imp,  &absx, &imp,  &imp,
+        /* A */  &imm,  &indx, &imm, &imp, &zp,  &zp,  &zp,  &imp, &imp, &imm,  &imp, &imp, &absl, &absl, &absl, &imp,
+        /* B */  &rel,  &indy, &imp, &imp, &zpx, &zpx, &zpy, &imp, &imp, &absy, &imp, &imp, &absx, &absx, &absy, &imp,
+        /* C */  &imm,  &indx, &imp, &imp, &zp,  &zp,  &zp,  &imp, &imp, &imm,  &imp, &imp, &absl, &absl, &absl, &imp,
+        /* D */  &rel,  &indy, &imp, &imp, &imp, &zpx, &zpx, &imp, &imp, &absy, &imp, &imp, &imp,  &absx, &absx, &imp,
+        /* E */  &imm,  &indx, &imp, &imp, &zp,  &zp,  &zp,  &imp, &imp, &imm,  &imp, &imp, &absl, &absl, &absl, &imp,
+        /* F */  &rel,  &indy, &imp, &imp, &imp, &zpx, &zpx, &imp, &imp, &absy, &imp, &imp, &imp,  &absx, &absx, &imp };
 
     ///* 0xVH  0    1     2    3    4    5    6    7    8    9     A    B    C     D     E     F  */
     ///* 0 */  imp, indx, ---, ---, ---, zp,  zp,  ---, imp, imm,  acc, ---, ---,  abs,  abs,  ---,
@@ -41,24 +42,24 @@ namespace NesCPU
     ///* F */  rel, indy, ---, ---, ---, zpx, zpx, ---, imp, absy, ---, ---, ---,  absx, absx, --- 
 
 
-    void (*OpcodesTable[256])() = {
+    NesCpu::Opcode NesCpu::OpcodesTable[256] = {
         /* 0xVH  0    1    2    3    4    5    6    7    8    9    A    B    C    D    E    F  */
-        /* 0 */  BRK, ORA, NOP, NOP, NOP, ORA, ASL, NOP, PHP, ORA, ASL, NOP, NOP, ORA, ASL, NOP,
-        /* 1 */  BPL, ORA, NOP, NOP, NOP, ORA, ASL, NOP, CLC, ORA, NOP, NOP, NOP, ORA, ASL, NOP,
-        /* 2 */  JSR, AND, NOP, NOP, BIT, AND, ROL, NOP, PLP, AND, ROL, NOP, BIT, AND, ROL, NOP,
-        /* 3 */  BMI, AND, NOP, NOP, NOP, AND, ROL, NOP, SEC, AND, NOP, NOP, NOP, AND, ROL, NOP,
-        /* 4 */  RTI, EOR, NOP, NOP, NOP, EOR, LSR, NOP, PHA, EOR, LSR, NOP, JMP, EOR, LSR, NOP,
-        /* 5 */  BVC, EOR, NOP, NOP, NOP, EOR, LSR, NOP, CLI, EOR, NOP, NOP, NOP, EOR, LSR, NOP,
-        /* 6 */  RTS, ADC, NOP, NOP, NOP, ADC, ROR, NOP, PLA, ADC, ROR, NOP, JMP, ADC, ROR, NOP,
-        /* 7 */  BVS, ADC, NOP, NOP, NOP, ADC, ROR, NOP, SEI, ADC, NOP, NOP, NOP, ADC, ROR, NOP,
-        /* 8 */  NOP, STA, NOP, NOP, STY, STA, STX, NOP, DEY, NOP, TXA, NOP, STY, STA, STX, NOP,
-        /* 9 */  BCC, STA, NOP, NOP, STY, STA, STX, NOP, TYA, STA, TXS, NOP, NOP, STA, NOP, NOP,
-        /* A */  LDY, LDA, LDX, NOP, LDY, LDA, LDX, NOP, TAY, LDA, TAX, NOP, LDY, LDA, LDX, NOP,
-        /* B */  BCS, LDA, NOP, NOP, LDY, LDA, LDX, NOP, CLV, LDA, TSX, NOP, LDY, LDA, LDX, NOP,
-        /* C */  CPY, CMP, NOP, NOP, CPY, CMP, DEC, NOP, INY, CMP, DEX, NOP, CPY, CMP, DEC, NOP,
-        /* D */  BNE, CMP, NOP, NOP, NOP, CMP, DEC, NOP, CLD, CMP, NOP, NOP, NOP, CMP, DEC, NOP,
-        /* E */  CPX, SBC, NOP, NOP, CPX, SBC, INC, NOP, INX, SBC, NOP, NOP, CPX, SBC, INC, NOP,
-        /* F */  BEQ, SBC, NOP, NOP, NOP, SBC, INC, NOP, SED, SBC, NOP, NOP, NOP, SBC, INC, NOP };
+        /* 0 */ &brk, &ora, &nop, &nop, &nop, &ora, &asl, &nop, &php, &ora, &asl, &nop, &nop, &ora, &asl, &nop,
+        /* 1 */ &bpl, &ora, &nop, &nop, &nop, &ora, &asl, &nop, &clc, &ora, &nop, &nop, &nop, &ora, &asl, &nop,
+        /* 2 */ &jsr, &AND, &nop, &nop, &bit, &AND, &rol, &nop, &plp, &AND, &rol, &nop, &bit, &AND, &rol, &nop,
+        /* 3 */ &bmi, &AND, &nop, &nop, &nop, &AND, &rol, &nop, &sec, &AND, &nop, &nop, &nop, &AND, &rol, &nop,
+        /* 4 */ &rti, &eor, &nop, &nop, &nop, &eor, &lsr, &nop, &pha, &eor, &lsr, &nop, &jmp, &eor, &lsr, &nop,
+        /* 5 */ &bvc, &eor, &nop, &nop, &nop, &eor, &lsr, &nop, &cli, &eor, &nop, &nop, &nop, &eor, &lsr, &nop,
+        /* 6 */ &rts, &adc, &nop, &nop, &nop, &adc, &ror, &nop, &pla, &adc, &ror, &nop, &jmp, &adc, &ror, &nop,
+        /* 7 */ &bvs, &adc, &nop, &nop, &nop, &adc, &ror, &nop, &sei, &adc, &nop, &nop, &nop, &adc, &ror, &nop,
+        /* 8 */ &nop, &sta, &nop, &nop, &sty, &sta, &stx, &nop, &dey, &nop, &txa, &nop, &sty, &sta, &stx, &nop,
+        /* 9 */ &bcc, &sta, &nop, &nop, &sty, &sta, &stx, &nop, &tya, &sta, &txs, &nop, &nop, &sta, &nop, &nop,
+        /* A */ &ldy, &lda, &ldx, &nop, &ldy, &lda, &ldx, &nop, &tay, &lda, &tax, &nop, &ldy, &lda, &ldx, &nop,
+        /* B */ &bcs, &lda, &nop, &nop, &ldy, &lda, &ldx, &nop, &clv, &lda, &tsx, &nop, &ldy, &lda, &ldx, &nop,
+        /* C */ &cpy, &cmp, &nop, &nop, &cpy, &cmp, &dec, &nop, &iny, &cmp, &dex, &nop, &cpy, &cmp, &dec, &nop,
+        /* D */ &bne, &cmp, &nop, &nop, &nop, &cmp, &dec, &nop, &cld, &cmp, &nop, &nop, &nop, &cmp, &dec, &nop,
+        /* E */ &cpx, &sbc, &nop, &nop, &cpx, &sbc, &inc, &nop, &inx, &sbc, &nop, &nop, &cpx, &sbc, &inc, &nop,
+        /* F */ &beq, &sbc, &nop, &nop, &nop, &sbc, &inc, &nop, &sed, &sbc, &nop, &nop, &nop, &sbc, &inc, &nop };
 
     ///* 0xVH  0    1    2    3    4    5    6    7    8    9    A    B    C    D    E    F  */
     ///* 0 */  BRK, ORA, ---, ---, ---, ORA, ASL, ---, PHP, ORA, ASL, ---, ---, ORA, ASL, ---,
@@ -78,7 +79,7 @@ namespace NesCPU
     ///* E */  CPX, SBC, ---, ---, CPX, SBC, INC, ---, INX, SBC, NOP, ---, CPX, SBC, INC, ---,
     ///* F */  BEQ, SBC, ---, ---, ---, SBC, INC, ---, SED, SBC, ---, ---, ---, SBC, INC, ---
 
-    uint32_t TicksTable[256] = {
+    uint32_t NesCpu::TicksTable[256] = {
         /* 0xVH  0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F  */
         /* 0 */  7, 6, 2, 8, 3, 3, 5, 5, 3, 2, 2, 2, 4, 4, 6, 6,
         /* 1 */  2, 5, 2, 8, 4, 4, 6, 6, 2, 4, 2, 7, 4, 4, 7, 7,
@@ -116,51 +117,151 @@ namespace NesCPU
     ///* F */  2, 5, -, -, -, 4, 6, -, 2, 4, -, -, -, 4, 7, -
 
 
+
     //Core CPU functions
-    void run()
+    void NesCpu::init()
+    {
+
+    }
+
+    void NesCpu::reset()
+    {
+
+    }
+
+    void NesCpu::shutdown()
+    {
+
+    }
+
+    void NesCpu::tick()
     {
         uint8_t opcode = Memory[PC];
-        AddrModesTable[opcode]();
-        OpcodesTable[opcode]();
-        g_ticks += TicksTable[opcode] + g_tickOffset;
+        (this->*AddrModesTable[opcode])();
+        (this->*OpcodesTable[opcode])();
+        m_ticks += TicksTable[opcode] + m_tickOffset;
         //...
 
         //Debugging
-        if (g_cpuLogEnabled) {
-            printCpuLog();
+        if (m_logEnabled) {
+            printLog();
         }
     }
 
 
+    //Debugging
+    void NesCpu::enableLog()
+    {
+        m_logEnabled = true;
+    }
+
+    void NesCpu::disableLog()
+    {
+        m_logEnabled = false;
+    }
+
+    void NesCpu::printLog()
+    {
+        *m_logStream << std::hex
+            << "A: " << A << " "
+            << "X: " << X << " "
+            << "Y: " << Y << " "
+            << "P: " << P << " "
+            << "SP: " << SP << " "
+            << "CYC: " << m_ticks << std::endl;
+    }
+
+    void NesCpu::setLogStream(std::ostream& logStream)
+    {
+        m_logStream = &logStream;
+    }
+
+
+    //template<class T>
+    //T memRead(uint8_t* memPtr)
+    //{
+    //    //Handle I/O
+    //    //Handle I/O
+    //    if (memPtr >= InternalRAM && memPtr < InternalRAM + INTERNAL_RAM_SIZE) {
+    //        //Internal RAM mirroring
+    //    }
+    //    else if (memPtr >= PpuRegisters && memPtr < PpuRegisters + PPU_REGISTERS_SIZE) {
+    //        //PPU registers mirroring and PPU I/O
+    //    }
+    //    else if (memPtr == DmaSpriteMem) {
+    //        //Sprite memory DMA
+    //    }
+    //    else if (memPtr == Controller1) {
+    //        //Controller #1 I/O
+    //    }
+    //    else if (memPtr == Controller2) {
+    //        //Controller #2 I/O
+    //    }
+    //    else if (memPtr >= ApuRegisters && memPtr < ApuRegisters + APU_REGISTERS_SIZE) {
+    //        //APU I/O (MemSpriteDMA, Controller1 and Controller2 are checked before)
+    //    }
+    //    else {
+    //        //Basic read
+    //    }
+    //    return *(T*)memPtr; //Basic read, move into condition
+    //}
+
+    //void memWrite(uint8_t* memPtr, uint8_t value)
+    //{
+    //    //Handle I/O
+    //    if (memPtr >= InternalRAM && memPtr < InternalRAM + INTERNAL_RAM_SIZE) {
+    //        //Internal RAM mirroring
+    //    }
+    //    else if (memPtr >= PpuRegisters && memPtr < PpuRegisters + PPU_REGISTERS_SIZE) {
+    //        //PPU registers mirroring and PPU I/O
+    //    }
+    //    else if (memPtr == DmaSpriteMem) {
+    //        //Sprite memory DMA
+    //    }
+    //    else if (memPtr == Controller1) {
+    //        //Controller #1 I/O
+    //    }
+    //    else if (memPtr == Controller2) {
+    //        //Controller #2 I/O
+    //    }
+    //    else if (memPtr >= ApuRegisters && memPtr < ApuRegisters + APU_REGISTERS_SIZE) {
+    //        //APU I/O (MemSpriteDMA, Controller1 and Controller2 are checked before)
+    //    }
+    //    else {
+    //        *memPtr = value; //Basic write
+    //    }
+    //}
+
+
     //Flags related functions
-    void checkNegative(uint16_t val)
+    void NesCpu::checkNegative(uint16_t val)
     {
         P = setBits(P, (uint8_t)StatusFlags::FLAG_ZERO, val & 0x80);
     }
 
-    void checkZero(uint16_t val)
+    void NesCpu::checkZero(uint16_t val)
     {
         P = setBits(P, (uint8_t)StatusFlags::FLAG_ZERO, val == 0);
     }
 
 
     //Stack operations
-    uint8_t  pull8()
+    uint8_t  NesCpu::pull8()
     {
         return Stack[++SP];
     }
 
-    uint16_t pull16()
+    uint16_t NesCpu::pull16()
     {
         return *((uint16_t*)Stack + (SP += 2));
     }
 
-    void push8(uint8_t value)
+    void NesCpu::push8(uint8_t value)
     {
         Stack[SP--] = value;
     }
 
-    void push16(uint16_t value)
+    void NesCpu::push16(uint16_t value)
     {
         //Check if good byte order
         *((uint16_t*)Stack + SP) = value;
@@ -173,72 +274,72 @@ namespace NesCPU
 
     //TO DO: Add tick offset.
 
-    void abs()
+    void NesCpu::absl()
     {
-        g_srcPtr = Memory + *((uint16_t*)(Memory + PC));
+        m_srcPtr = Memory + *((uint16_t*)(Memory + PC));
         PC += 2;
     }
 
-    void absx()
+    void NesCpu::absx()
     {
-        g_srcPtr = Memory + *((uint16_t*)(Memory + PC)) + X;
+        m_srcPtr = Memory + *((uint16_t*)(Memory + PC)) + X;
         PC += 2;
     }
 
-    void absy()
+    void NesCpu::absy()
     {
-        g_srcPtr = Memory + *((uint16_t*)(Memory + PC)) + Y;
+        m_srcPtr = Memory + *((uint16_t*)(Memory + PC)) + Y;
         PC += 2;
     }
 
-    void acc()
+    void NesCpu::acc()
     {
-        g_srcPtr = &A;
+        m_srcPtr = &A;
     }
 
-    void imm()
+    void NesCpu::imm()
     {
-        g_srcPtr = Memory + PC++;
+        m_srcPtr = Memory + PC++;
     }
 
-    void imp() { }
+    void NesCpu::imp() { }
 
-    void ind()
+    void NesCpu::ind()
     {
-        g_srcPtr = Memory + PC;
+        m_srcPtr = Memory + PC;
         PC += 2;
     }
 
-    void indx()
+    void NesCpu::indx()
     {
         uint16_t tmpAddr = Memory[(Memory[PC] + X) & 0x00FF] | (Memory[(Memory[PC++] + X + 1) & 0x00FF] << 8);
-        g_srcPtr = Memory + tmpAddr;
+        m_srcPtr = Memory + tmpAddr;
     }
 
-    void indy()
+    void NesCpu::indy()
     {
         uint16_t tmpAddr = Memory[Memory[PC]] | (Memory[(Memory[PC++] + 1) & 0x00FF] << 8);
-        g_srcPtr = Memory + tmpAddr + Y;
+        m_srcPtr = Memory + tmpAddr + Y;
     }
 
-    void rel()
+    void NesCpu::rel()
     {
-        g_srcPtr = Memory + PC++;
+        m_srcPtr = Memory + PC++;
     }
 
-    void zp()
+    void NesCpu::zp()
     {
-        g_srcPtr = Memory + Memory[PC++];
+        m_srcPtr = Memory + Memory[PC++];
     }
 
-    void zpx()
+    void NesCpu::zpx()
     {
-        g_srcPtr = Memory + ((Memory[PC++] + X) & 0x00FF);
+        m_srcPtr = Memory + ((Memory[PC++] + X) & 0x00FF);
     }
 
-    void zpy()
+    void NesCpu::zpy()
     {
-        g_srcPtr = Memory + ((Memory[PC++] + Y) & 0x00FF);
+        m_srcPtr = Memory + ((Memory[PC++] + Y) & 0x00FF);
     }
 
 
@@ -246,78 +347,78 @@ namespace NesCPU
     //Opcodes
 
     //--Storage--
-    void LDA()
+    void NesCpu::lda()
     {
-        A = *g_srcPtr;
+        A = *m_srcPtr; //A = memRead<uint8_t>(g_srcPtr);
         checkNegative(A);
         checkZero(A);
     }
 
-    void LDX()
+    void NesCpu::ldx()
     {
-        X = *g_srcPtr;
+        X = *m_srcPtr; //X = memRead<uint8_t>(g_srcPtr);
         checkNegative(X);
         checkZero(X);
     }
 
-    void LDY()
+    void NesCpu::ldy()
     {
-        Y = *g_srcPtr;
+        Y = *m_srcPtr; //Y = memRead<uint8_t>(g_srcPtr);
         checkNegative(Y);
         checkZero(Y);
     }
 
-    void STA()
+    void NesCpu::sta()
     {
-        *g_srcPtr = A;
+        *m_srcPtr = A; //memWrite(g_srcPtr, A)
     }
 
-    void STX()
+    void NesCpu::stx()
     {
-        *g_srcPtr = X;
+        *m_srcPtr = X; //memWrite(g_srcPtr, X)
     }
 
-    void STY()
+    void NesCpu::sty()
     {
-        *g_srcPtr = Y;
+        *m_srcPtr = Y; //memWrite(g_srcPtr, Y)
     }
 
-    void TAX()
+    void NesCpu::tax()
     {
         X = A;
         checkNegative(X);
         checkZero(X);
     }
 
-    void TAY()
+    void NesCpu::tay()
     {
         Y = A;
         checkNegative(Y);
         checkZero(Y);
     }
 
-    void TXA()
+    void NesCpu::txa()
     {
         A = X;
         checkNegative(A);
         checkZero(A);
     }
 
-    void TYA()
+    void NesCpu::tya()
     {
         A = Y;
         checkNegative(A);
         checkZero(A);
     }
 
-    void TSX()
+    void NesCpu::tsx()
     {
         X = SP;
         checkNegative(X);
         checkZero(X);
     }
 
-    void TXS()
+    void NesCpu::txs()
     {
         SP = X;
         checkNegative(SP);
@@ -326,61 +427,71 @@ namespace NesCPU
 
 
     //--Math--
-    void ADC()
+    void NesCpu::adc()
     {
-        uint16_t temp = A + *g_srcPtr + (P & FLAG_CARRY);
-        A = (uint8_t)temp;
-        P = setBits(P, (uint8_t)StatusFlags::FLAG_CARRY, temp > 0xFF);
-        P = setBits(P, (uint8_t)StatusFlags::FLAG_OVERFLOW, (uint8_t)(temp & 0x80) != (A & 0x80));
-        checkNegative(temp);
-        checkZero(temp);
+        uint16_t tmp = A + *m_srcPtr + (P & FLAG_CARRY); //uint16_t tmp = A + memRead<uint8_t>(g_srcPtr) + (P & FLAG_CARRY);
+        A = (uint8_t)tmp;
+        P = setBits(P, (uint8_t)StatusFlags::FLAG_CARRY, tmp > 0xFF);
+        P = setBits(P, (uint8_t)StatusFlags::FLAG_OVERFLOW, (uint8_t)(tmp & 0x80) != (A & 0x80));
+        checkNegative(tmp);
+        checkZero(tmp);
     }
 
-    void DEC()
+    void NesCpu::dec()
     {
-        --*g_srcPtr;
-        checkNegative(*g_srcPtr);
-        checkZero(*g_srcPtr);
+        //uint8_t arg = memRead<uint8_t>(g_srcPtr);
+        //--arg;
+        //memWrite(g_srcPtr, arg);
+        //checkNegative(arg);
+        //checkZero(arg);
+        --*m_srcPtr; 
+        checkNegative(*m_srcPtr);
+        checkZero(*m_srcPtr);
     }
 
-    void DEX()
+    void NesCpu::dex()
     {
         --X;
         checkNegative(X);
         checkZero(X);
     }
 
-    void DEY()
+    void NesCpu::dey()
     {
         --Y;
         checkNegative(Y);
         checkZero(Y);
     }
 
-    void INC()
+    void NesCpu::inc()
     {
-        ++*g_srcPtr;
-        checkNegative(*g_srcPtr);
-        checkZero(*g_srcPtr);
+        //uint8_t arg = memRead<uint8_t>(g_srcPtr);
+        //++arg;
+        //memWrite(g_srcPtr, arg);
+        //checkNegative(arg);
+        //checkZero(arg);
+        ++*m_srcPtr;
+        checkNegative(*m_srcPtr);
+        checkZero(*m_srcPtr);
     }
 
-    void INX()
+    void NesCpu::inx()
     {
         ++X;
         checkNegative(X);
         checkZero(X);
     }
 
-    void INY()
+    void NesCpu::iny()
     {
         ++Y;
         checkNegative(Y);
         checkZero(Y);
     }
 
-    void SBC()
+    void NesCpu::sbc()
     {
-        A += (*g_srcPtr ^ 0xFF) + (P & FLAG_CARRY);
+        A += (*m_srcPtr ^ 0xFF) + (P & FLAG_CARRY); //A += (memRead<uint8_t>(g_srcPtr) ^ 0xFF) + (P & FLAG_CARRY);
         P = setBits(P, (uint8_t)StatusFlags::FLAG_OVERFLOW, A > 0x7F);
         P = setBits(P, (uint8_t)StatusFlags::FLAG_CARRY, A >= 0);
         checkNegative(A);
@@ -389,273 +500,281 @@ namespace NesCPU
 
 
     //--Bitwise--
-    void AND()
+    void NesCpu::AND()
     {
-        A &= *g_srcPtr;
+        A &= *m_srcPtr; //A &= memRead<uint8_t>(g_srcPptr)
         checkNegative(A);
         checkZero(A);
     }
 
-    void ASL()
+    void NesCpu::asl()
     {
-        P = setBits(P, (uint8_t)StatusFlags::FLAG_CARRY, *g_srcPtr & 0x80);
-        *g_srcPtr <<= 1;
-        checkNegative(*g_srcPtr);
-        checkZero(*g_srcPtr);
+        //uint8_t arg = memRead<uint8_t>(g_srcPtr);
+        //P = setBits(P, (uint8_t)StatusFlags::FLAG_CARRY, arg & 0x80);
+        //arg <<= 1;
+        //memWrite(g_srcPtr, arg);
+        //checkNegative(arg);
+        //checkZero(arg);
+        P = setBits(P, (uint8_t)StatusFlags::FLAG_CARRY, *m_srcPtr & 0x80);
+        *m_srcPtr <<= 1;
+        checkNegative(*m_srcPtr);
+        checkZero(*m_srcPtr);
     }
 
-    void BIT() 
+    void NesCpu::bit()
     {
-        uint8_t temp = A & *g_srcPtr;
-        P = setBits(P, (uint8_t)StatusFlags::FLAG_OVERFLOW, temp & 0x40);
-        checkNegative(temp);
-        checkZero(temp);
+        uint8_t tmp = A & *m_srcPtr; //uint8_t tmp = A & memRead<uint8_t>(g_srcPtr);
+        P = setBits(P, (uint8_t)StatusFlags::FLAG_OVERFLOW, tmp & 0x40);
+        checkNegative(tmp);
+        checkZero(tmp);
     }
 
-    void EOR()
+    void NesCpu::eor()
     {
-        A ^= *g_srcPtr;
+        A ^= *m_srcPtr; //A ^= memRead<uint8_t>(g_srcPptr)
         checkNegative(A);
         checkZero(A);
     }
 
-    void LSR()
+    void NesCpu::lsr()
     {
-        P = setBits(P, (uint8_t)StatusFlags::FLAG_CARRY, *g_srcPtr & 0x01);
-        *g_srcPtr >>= 1;
+        //uint8_t arg = memRead<uint8_t>(g_srcPtr);
+        //P = setBits(P, (uint8_t)StatusFlags::FLAG_CARRY, arg & 0x80);
+        //arg >>= 1;
+        //memWrite(g_srcPtr, arg);
+        //P = setBits(P, (uint8_t)StatusFlags::FLAG_NEGATIVE, false);
+        //checkZero(arg);
+        P = setBits(P, (uint8_t)StatusFlags::FLAG_CARRY, *m_srcPtr & 0x01);
+        *m_srcPtr >>= 1;
         P = setBits(P, (uint8_t)StatusFlags::FLAG_NEGATIVE, false); //Clear negative flag
-        checkZero(*g_srcPtr);
+        checkZero(*m_srcPtr);
     }
 
-    void ORA()
+    void NesCpu::ora()
     {
-        A |= *g_srcPtr;
+        A |= *m_srcPtr; //A |= memRead<uint8_t>(g_srcPtr);
         checkNegative(A);
         checkZero(A);
     }
 
-    void ROL()
+    void NesCpu::rol()
     {
-        uint8_t temp = setBits(*g_srcPtr << 1, 0x01, P & StatusFlags::FLAG_CARRY);
-        P = setBits(P, (uint8_t)StatusFlags::FLAG_CARRY, *g_srcPtr & 0x80);
-        *g_srcPtr = temp;
-        checkNegative(*g_srcPtr);
-        checkZero(*g_srcPtr);
+        //uint8_t arg = memRead<uint8_t>(g_srcPtr);
+        //uint8_t tmp = setBits(arg << 1, 0x01, P & StatusFlags::FLAG_CARRY);
+        //P = setBits(P, (uint8_t)StatusFlags::FLAG_CARRY, arg & 0x80);
+        //arg = tmp;
+        //memWrite(g_srcPtr, arg);
+        //checkNegative(arg);
+        //checkZero(arg);
+        uint8_t tmp = setBits(*m_srcPtr << 1, 0x01, P & StatusFlags::FLAG_CARRY);
+        P = setBits(P, (uint8_t)StatusFlags::FLAG_CARRY, *m_srcPtr & 0x80);
+        *m_srcPtr = tmp;
+        checkNegative(*m_srcPtr);
+        checkZero(*m_srcPtr);
     }
 
-    void ROR()
+    void NesCpu::ror()
     {
-        uint8_t temp = setBits(*g_srcPtr >> 1, 0x80, P & StatusFlags::FLAG_CARRY);
-        P = setBits(P, (uint8_t)StatusFlags::FLAG_CARRY, *g_srcPtr & 0x01);
-        *g_srcPtr = temp;
-        checkNegative(*g_srcPtr);
-        checkZero(*g_srcPtr);
+        //uint8_t arg = memRead<uint8_t>(g_srcPtr);
+        //uint8_t tmp = setBits(arg >> 1, 0x80, P & StatusFlags::FLAG_CARRY);
+        //P = setBits(P, (uint8_t)StatusFlags::FLAG_CARRY, arg & 0x01);
+        //arg = tmp;
+        //memWrite(g_srcPtr, arg);
+        //checkNegative(arg);
+        //checkZero(arg);
+        uint8_t tmp = setBits(*m_srcPtr >> 1, 0x80, P & StatusFlags::FLAG_CARRY);
+        P = setBits(P, (uint8_t)StatusFlags::FLAG_CARRY, *m_srcPtr & 0x01);
+        *m_srcPtr = tmp;
+        checkNegative(*m_srcPtr);
+        checkZero(*m_srcPtr);
     }
 
 
     //--Branch--
-    void BCS()
+    void NesCpu::bcs()
     {
         if (P & FLAG_CARRY) {
-            PC = --PC + *(int8_t*)g_srcPtr;
+            PC = --PC + *(int8_t*)m_srcPtr; //PC = --PC + memRead<int8_t>(g_srcPtr);
         }
     }
 
-    void BCC()
+    void NesCpu::bcc()
     {
         if (!(P & FLAG_CARRY)) {
-            PC = --PC + *(int8_t*)g_srcPtr;
+            PC = --PC + *(int8_t*)m_srcPtr; //PC = --PC + memRead<int8_t>(g_srcPtr);
         }
     }
 
-    void BEQ()
+    void NesCpu::beq()
     {
         if (P & FLAG_ZERO) {
-            PC = --PC + *(int8_t*)g_srcPtr;
+            PC = --PC + *(int8_t*)m_srcPtr; //PC = --PC + memRead<int8_t>(g_srcPtr);
         }
     }
 
-    void BNE()
+    void NesCpu::bne()
     {
         if (!(P & FLAG_ZERO)) {
-            PC = --PC + *(int8_t*)g_srcPtr;
+            PC = --PC + *(int8_t*)m_srcPtr; //PC = --PC + memRead<int8_t>(g_srcPtr);
         }
     }
 
-    void BMI()
+    void NesCpu::bmi()
     {
         if (P & FLAG_NEGATIVE) {
-            PC = --PC + *(int8_t*)g_srcPtr;
+            PC = --PC + *(int8_t*)m_srcPtr; //PC = --PC + memRead<int8_t>(g_srcPtr);
         }
     }
 
-    void BPL()
+    void NesCpu::bpl()
     {
         if (!(P & FLAG_NEGATIVE)) {
-            PC = --PC + *(int8_t*)g_srcPtr;
+            PC = --PC + *(int8_t*)m_srcPtr; //PC = --PC + memRead<int8_t>(g_srcPtr);
         }
     }
 
-    void BVS()
+    void NesCpu::bvs()
     {
         if (P & FLAG_OVERFLOW) {
-            PC = --PC + *(int8_t*)g_srcPtr;
+            PC = --PC + *(int8_t*)m_srcPtr; //PC = --PC + memRead<int8_t>(g_srcPtr);
         }
     }
 
-    void BVC()
+    void NesCpu::bvc()
     {
         if (!(P & FLAG_OVERFLOW)) {
-            PC = --PC + *(int8_t*)g_srcPtr;
+            PC = --PC + *(int8_t*)m_srcPtr; //PC = --PC + memRead<int8_t>(g_srcPtr);
         }
     }
 
 
     //--Jump--
-    void JMP()
+    void NesCpu::jmp()
     {
-        PC = *(uint16_t*)g_srcPtr;
+        PC = *(uint16_t*)m_srcPtr; //PC = memRead<uint16_t>(g_srcPtr);
     }
 
-    void JSR()
+    void NesCpu::jsr()
     {
         push16(PC); //Push next instruction
-        PC = *(uint16_t*)g_srcPtr;
+        PC = *(uint16_t*)m_srcPtr; //PC = memRead<uint16_t>(g_srcPtr);
     }
 
-    void RTI()
+    void NesCpu::rti()
     {
         P  = pull8();
         PC = pull16();
     }
 
-    void RTS()
+    void NesCpu::rts()
     {
         PC = pull16();
     }
 
 
     //--Registers--
-    void CLC()
+    void NesCpu::clc()
     {
         P &= ~StatusFlags::FLAG_CARRY;
     }
 
-    void CLD()
+    void NesCpu::cld()
     {
         P &= ~StatusFlags::FLAG_DECIMAL_MODE;
     }
 
-    void CLI()
+    void NesCpu::cli()
     {
         P &= ~StatusFlags::FLAG_INTERRUPT_DISABLE;
     }
 
-    void CLV()
+    void NesCpu::clv()
     {
         P &= ~StatusFlags::FLAG_OVERFLOW;
     }
 
-    void CMP()
+    void NesCpu::cmp()
     {
-        P = setBits(P, (uint8_t)StatusFlags::FLAG_CARRY, A >= *g_srcPtr);
-        checkNegative(A - *g_srcPtr);
-        checkZero(A - *g_srcPtr);
+        //uint8_t arg = memRead<uint8_t>(g_srcPtr);
+        //P = setBits(P, (uint8_t)StatusFlags::FLAG_CARRY, A >= arg);
+        //checkNegative(A - arg);
+        //checkZero(A - arg);
+        P = setBits(P, (uint8_t)StatusFlags::FLAG_CARRY, A >= *m_srcPtr);
+        checkNegative(A - *m_srcPtr);
+        checkZero(A - *m_srcPtr);
     }
 
-    void CPX()
+    void NesCpu::cpx()
     {
-        P = setBits(P, (uint8_t)StatusFlags::FLAG_CARRY, X >= *g_srcPtr);
-        checkNegative(X - *g_srcPtr);
-        checkZero(X - *g_srcPtr);
+        //uint8_t arg = memRead<uint8_t>(g_srcPtr);
+        //P = setBits(P, (uint8_t)StatusFlags::FLAG_CARRY, X >= arg);
+        //checkNegative(X - arg);
+        //checkZero(X - arg);
+        P = setBits(P, (uint8_t)StatusFlags::FLAG_CARRY, X >= *m_srcPtr);
+        checkNegative(X - *m_srcPtr);
+        checkZero(X - *m_srcPtr);
     }
 
-    void CPY()
+    void NesCpu::cpy()
     {
-        P = setBits(P, (uint8_t)StatusFlags::FLAG_CARRY, Y >= *g_srcPtr);
-        checkNegative(Y - *g_srcPtr);
-        checkZero(Y - *g_srcPtr);
+        //uint8_t arg = memRead<uint8_t>(g_srcPtr);
+        //P = setBits(P, (uint8_t)StatusFlags::FLAG_CARRY, Y >= arg);
+        //checkNegative(Y - arg);
+        //checkZero(Y - arg);
+        P = setBits(P, (uint8_t)StatusFlags::FLAG_CARRY, Y >= *m_srcPtr);
+        checkNegative(Y - *m_srcPtr);
+        checkZero(Y - *m_srcPtr);
     }
 
-    void SEC()
+    void NesCpu::sec()
     {
         P |= StatusFlags::FLAG_CARRY;
     }
 
-    void SED()
+    void NesCpu::sed()
     {
         P |= StatusFlags::FLAG_DECIMAL_MODE;
     }
 
-    void SEI()
+    void NesCpu::sei()
     {
         P |= StatusFlags::FLAG_INTERRUPT_DISABLE;
     }
 
 
     //--Stack--
-    void PHA()
+    void NesCpu::pha()
     {
         push8(A);
     }
 
-    void PHP()
+    void NesCpu::php()
     {
         push8(P);
     }
 
-    void PLA()
+    void NesCpu::pla()
     {
         A = pull8();
         checkNegative(A);
         checkZero(A);
     }
 
-    void PLP()
+    void NesCpu::plp()
     {
         P = pull8();
     }
 
 
     //--System--
-    void BRK()
+    void NesCpu::brk()
     {
         //Waist cycle ? (or set interrupt flag ?)
     }
 
-    void NOP()
+    void NesCpu::nop()
     {
         //Waist cycle
-    }
-
-
-
-
-    //Debugging
-    void enableCpuLog()
-    {
-        g_cpuLogEnabled = true;
-    }
-
-    void disableCpuLog()
-    {
-        g_cpuLogEnabled = false;
-    }
-
-    void setCpuLogStream(std::ostream& logStream)
-    {
-        g_cpuLogStream = &logStream;
-    }
-
-    void printCpuLog()
-    {
-        *g_cpuLogStream << std::hex
-                        << "A: "   << A       << " "
-                        << "X: "   << X       << " "
-                        << "Y: "   << Y       << " "
-                        << "P: "   << P       << " "
-                        << "SP: "  << SP      << " "
-                        << "CYC: " << g_ticks << std::endl;
     }
 
 }

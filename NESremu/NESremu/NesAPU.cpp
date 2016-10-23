@@ -1,6 +1,6 @@
 #include "NesAPU.h"
 
-namespace NesAPU
+namespace NESremu
 {
 
 }
