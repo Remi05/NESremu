@@ -5,68 +5,6 @@
 
 namespace NESremu
 {
-<<<<<<< HEAD
-=======
-    //Registers
-    std::uint16_t PC; //On reset PC = *ResetHandlerAddr;
-    std::uint8_t  SP = 0xFF;
-    std::uint8_t  A  = 0x00;
-    std::uint8_t  X  = 0x00;
-    std::uint8_t  Y  = 0x00;
-    std::uint8_t  P  = 0x34; //Status register
-    
-    //Memory
-    std::uint8_t   Memory[0x10000];                               //$0000-$FFFF
-    std::uint8_t*  ZeroPage         = Memory;                     //$0000–$00FF
-    std::uint8_t*  Stack            = Memory + 0x0100;            //$0100–$01FF
-    std::uint8_t*  InternalRAM      = Memory + 0x0200;            //$0200–$07FF -> $0000-$07FF, mirrored at $0800-$0FFF, $1000-$17FF, $1800-$1FFF
-    std::uint8_t*  PpuRegisters     = Memory + 0x2000;            //$2000-$2007, mirrored through $2008-$3FFF every 8 bytes
-    std::uint8_t*  ApuRegisters     = Memory + 0x4000;            //$4000-$401F, except $4014,$4016,$4017
-    std::uint8_t*  DmaSpriteMem     = Memory + 0x4014;            //$4014
-    std::uint8_t*  Controller1      = Memory + 0x4016;            //$4016
-    std::uint8_t*  Controller2      = Memory + 0x4017;            //$4017
-    std::uint8_t*  ExpansionROM     = Memory + 0x4020;            //$4020–$5FFF
-    std::uint8_t*  SaveRAM          = Memory + 0x6000;            //$6000–$7FFF
-    std::uint8_t*  PrgROM           = Memory + 0x8000;            //$8000–$FFFF
-    std::uint16_t* NmiVectorAddr    = (uint16_t*)Memory + 0xFFFA; //$FFFA–$FFFB
-    std::uint16_t* ResetVectorAddr  = (uint16_t*)Memory + 0xFFFC; //$FFFC–$FFFD
-    std::uint16_t* BrkVectorAddr    = (uint16_t*)Memory + 0xFFFE; //$FFFE–$FFFF
-
-    //Status register flags
-    enum StatusFlags
-    {
-        FLAG_CARRY             = 0x01,
-        FLAG_ZERO              = 0x02,
-        FLAG_INTERRUPT_DISABLE = 0x04,
-        FLAG_DECIMAL_MODE      = 0x08,
-        FLAG_BREAK             = 0x10,
-        FLAG_OVERFLOW          = 0x40,
-        FLAG_NEGATIVE          = 0x80
-    };
-
-    //Tables
-    extern void (*AddrModesTable[256])();
-    extern void (*OpcodesTable[256])();
-    extern uint32_t TicksTable[256];
-
-    //Memory pointer (used because of different addressing modes)
-    uint8_t* g_srcPtr;
-
-
-    //Ticks
-    uint32_t g_ticks      = 0;
-    uint32_t g_tickOffset = 0;
-
-
-    //Core CPU functions
-    void run();
-
-
-    //Flags related functions
-    void checkNegative(uint16_t val);
-    void checkZero(uint16_t val);
-
->>>>>>> 9189934ae21ed0d9cde42533aac9feb7e5734f73
 
     //Misc.
     template<class T>
