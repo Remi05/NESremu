@@ -95,19 +95,19 @@ namespace NESremu
 
 
         //Addressing modes
-        void absl(); //Absolute				     	     : $0000		
-        void absx(); //Absolute, X						 : $0000,X
-        void absy(); //Absolute, Y						 : $0000,Y
+        void absl(); //Absolute                          : $0000		
+        void absx(); //Absolute, X                       : $0000,X
+        void absy(); //Absolute, Y                       : $0000,Y
         void acc();  //Accumulator
-        void imm();  //Immediate						 : #$00
+        void imm();  //Immediate                         : #$00
         void imp();  //Implied
         void ind();  //Indirect                          : ($0000)
         void indx(); //Zero Page Indexed Indirect with X : ($00, X)
         void indy(); //Zero Page Indirect Indexed with Y : ($00), Y
-        void rel();  //Relative							 : PC + #$00
-        void zp();   //Zero Page						 : $00
-        void zpx();  //Zero Page, X						 : $00, X
-        void zpy();  //Zero Page, Y						 : $00, Y
+        void rel();  //Relative                          : PC + #$00
+        void zp();   //Zero Page                         : $00
+        void zpx();  //Zero Page, X                      : $00, X
+        void zpy();  //Zero Page, Y                      : $00, Y
 
 
         //Opcodes
