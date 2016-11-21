@@ -1,10 +1,13 @@
 #pragma once
 #include <cstdint>
+#include "ILoggable.h"
+#include "NesIOComponent.h"
 
-namespace NESremu
+namespace nesremu
 {
-    class NesController
+    class NesController : public NesIoComponent, public ILoggable
     {
+    private:
         enum NesButtons
         {
             BUTTON_A = 0x01,
@@ -17,7 +20,19 @@ namespace NESremu
             BUTTON_RIGHT = 0x80
         };
 
-        //uint8_t Controller1 = 0;
-        //uint8_t Controller2 = 0;
+        //Debugging
+        bool m_logEnabled = false;
+        std::ostream* m_logStream = &std::clog;
+
+
+    public:        
+        virtual uint8_t read(uint16_t address);
+        virtual void write(uint16_t address, uint8_t value);
+
+        //Debugging
+        virtual void enableLog()  { m_logEnabled = true;  }
+        virtual void disableLog() { m_logEnabled = false; }
+        virtual void setLogStream(std::ostream& logStream) { m_logStream = &logStream; }
+
     };
 }

@@ -19,21 +19,26 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ILoggable.h" />
     <ClInclude Include="NesAPU.h" />
     <ClInclude Include="NesBus.h" />
     <ClInclude Include="NesController.h" />
     <ClInclude Include="NesCPU.h" />
     <ClInclude Include="NesEmu.h" />
+    <ClInclude Include="NesIOComponent.h" />
     <ClInclude Include="NesPPU.h" />
+    <ClInclude Include="NesRAM.h" />
     <ClInclude Include="NesROM.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="NesAPU.cpp" />
+    <ClCompile Include="NesBus.cpp" />
     <ClCompile Include="NesController.cpp" />
     <ClCompile Include="NesCPU.cpp" />
     <ClCompile Include="NesEmu.cpp" />
     <ClCompile Include="NesPPU.cpp" />
+    <ClCompile Include="NesRAM.cpp" />
     <ClCompile Include="NesROM.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

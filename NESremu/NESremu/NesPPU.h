@@ -1,9 +1,11 @@
 #pragma once
 #include <cstdint>
+#include "ILoggable.h"
+#include "NesBus.h"
 
-namespace NESremu
+namespace nesremu
 {
-    class NesPpu
+    class NesPpu : public ILoggable
     {
     private:
         ////PPU 16KiB memory bank (16384 bytes)
@@ -22,5 +24,32 @@ namespace NESremu
         ////Byte 1: Tile index.
         ////Byte 2: Sprite attributes.
         ////Byte 3: X position of the left side of the sprite.
+
+        NesBus* m_bus = nullptr;
+        uint32_t m_ticks = 0;
+
+        //Debugging
+        bool m_logEnabled = false;
+        std::ostream* m_logStream = &std::clog;
+
+
+    public:
+        NesPpu(NesBus* bus);
+        ~NesPpu();
+
+        //Core PPU functions.
+        uint32_t getTicks();
+        void load(std::istream& saveStream);
+        void reset();
+        void save(std::ostream& saveStream);
+        void start();
+        void stop();
+        void tick();
+
+        //Debugging
+        virtual void enableLog()  { m_logEnabled = true;  }
+        virtual void disableLog() { m_logEnabled = false; }
+        virtual void setLogStream(std::ostream& logStream) { m_logStream = &logStream; }
+
     };
 }
