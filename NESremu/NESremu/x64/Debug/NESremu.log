@@ -1,17 +1,1 @@
-﻿  main.cpp
-  NesROM.cpp
-  NesRAM.cpp
-  NesPPU.cpp
-  NesEmu.cpp
-  NesCPU.cpp
-c:\users\remi_\desktop\remi\prog\nes\nesremu\nesremu\nesremu\nescpu.cpp(166): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
-c:\users\remi_\desktop\remi\prog\nes\nesremu\nesremu\nesremu\nescpu.cpp(486): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
-c:\users\remi_\desktop\remi\prog\nes\nesremu\nesremu\nesremu\nescpu.cpp(501): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
-c:\users\remi_\desktop\remi\prog\nes\nesremu\nesremu\nesremu\nescpu.cpp(539): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
-  NesBus.cpp
-c:\users\remi_\desktop\remi\prog\nes\nesremu\nesremu\nesremu\nesbus.cpp(57): warning C4838: conversion from 'int' to 'uint32_t' requires a narrowing conversion
-c:\users\remi_\desktop\remi\prog\nes\nesremu\nesremu\nesremu\nesbus.cpp(120): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
-  NesAPU.cpp
-  Generating Code...
-  NESremu.vcxproj -> C:\Users\remi_\Desktop\Remi\Prog\NES\NESremu\NESremu\x64\Debug\NESremu.exe
-  NESremu.vcxproj -> C:\Users\remi_\Desktop\Remi\Prog\NES\NESremu\NESremu\x64\Debug\NESremu.pdb (Partial PDB)
+﻿
