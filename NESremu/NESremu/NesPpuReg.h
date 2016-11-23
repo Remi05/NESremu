@@ -14,24 +14,22 @@ namespace nesremu
     class NesPpuReg : public NesIoComponent, public ILoggable
     {
     private:
-        static const uint16_t PPUCTRL   = 0x2000;
-        static const uint16_t PPUMASK   = 0x2001;
-        static const uint16_t PPUSTATUS = 0x2002;
-        static const uint16_t OAMADDR   = 0x2003;
-        static const uint16_t OAMDATA   = 0x2004;
-        static const uint16_t PPUSCROLL = 0x2005;
-        static const uint16_t PPUADDR   = 0x2006;
-        static const uint16_t PPUDATA   = 0x2007;
+        enum PpuRegisters {  PPUCTRL   = 0x2000,
+                             PPUMASK   = 0x2001,
+                             PPUSTATUS = 0x2002,
+                             OAMADDR   = 0x2003,
+                             OAMDATA   = 0x2004,
+                             PPUSCROLL = 0x2005,
+                             PPUADDR   = 0x2006,
+                             PPUDATA   = 0x2007 };
 
-        static const uint16_t VRAM_INC_FLAGS;
-
-        enum PPUCTRL_FLAGS { FLAG_NAME_TBL     = 0b00000011,
-                             FLAG_VRAM_INC     = 0b00000100,
-                             FLAG_SPR_PTRN_TBL = 0b00001000,
-                             FLAG_BCK_PTRN_TBL = 0b00010000,
-                             FLAG_SPRITE_SIZE  = 0b00100000,
-                             FLAG_MASTER_SLAVE = 0b01000000,
-                             FLAG_VBLANK_NMI   = 0b10000000 };
+        enum PpuCtrlFlags { FLAG_NAME_TBL     = 0b00000011,
+                            FLAG_VRAM_INC     = 0b00000100,
+                            FLAG_SPR_PTRN_TBL = 0b00001000,
+                            FLAG_BCK_PTRN_TBL = 0b00010000,
+                            FLAG_SPRITE_SIZE  = 0b00100000,
+                            FLAG_MASTER_SLAVE = 0b01000000,
+                            FLAG_VBLANK_NMI   = 0b10000000 };
         
         uint8_t  m_ppuctrl   = 0;
         uint8_t  m_ppumask   = 0;
@@ -54,8 +52,8 @@ namespace nesremu
         virtual void write(uint16_t address, uint8_t value);
 
         //Debugging
-        virtual void enableLog();
-        virtual void disableLog();
-        virtual void setLogStream(std::ostream& logStream);
+        virtual void enableLog()  { m_logEnabled = true;  }
+        virtual void disableLog() { m_logEnabled = false; }
+        virtual void setLogStream(std::ostream& logStream) { m_logStream = &logStream; }
     };
 }

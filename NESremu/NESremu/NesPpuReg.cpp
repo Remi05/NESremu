@@ -104,21 +104,4 @@ namespace nesremu
 
     }
 
-
-    //Debugging
-    void NesPpuReg::enableLog()
-    {
-        m_logEnabled = true;
-    }
-
-    void NesPpuReg::disableLog()
-    {
-        m_logEnabled = false;
-    }
-
-    void NesPpuReg::setLogStream(std::ostream& logStream)
-    {
-        m_logStream = &logStream;
-    }
-
 }
