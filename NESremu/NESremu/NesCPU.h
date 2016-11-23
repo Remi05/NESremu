@@ -1,3 +1,9 @@
+//Author: Remi Pelletier
+//File:   NesCPU.h
+//Desc.:  Declaration of the NesCpu class used to emulate
+//        the NES CPU.
+
+
 #pragma once
 #include <cstdint>
 #include <iostream>

@@ -1,3 +1,8 @@
+//Author: Remi Pelletier
+//File:   NesBus.h
+//Desc.:  Declaration of the NesBus class used to connect
+//        the various components.
+
 #pragma once
 #include <cstdint>
 #include <map>

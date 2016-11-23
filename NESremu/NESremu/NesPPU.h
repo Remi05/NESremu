@@ -1,3 +1,9 @@
+//Author: Remi Pelletier
+//File:   NesPPU.h
+//Desc.:  Declaration of the NesPpu class used to emulate
+//        the NES PPU.
+
+
 #pragma once
 #include <cstdint>
 #include "ILoggable.h"
@@ -25,7 +31,7 @@ namespace nesremu
         ////Byte 2: Sprite attributes.
         ////Byte 3: X position of the left side of the sprite.
 
-        NesBus* m_bus = nullptr;
+        NesBus*  m_bus   = nullptr;
         uint32_t m_ticks = 0;
 
         //Debugging

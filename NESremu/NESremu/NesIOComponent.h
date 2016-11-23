@@ -1,3 +1,8 @@
+//Author: Remi Pelletier
+//File:   NesIOComponent.h
+//Desc.:  Declaration of the NesIOComponent interface.
+
+
 #pragma once
 #include <cstdint>
 

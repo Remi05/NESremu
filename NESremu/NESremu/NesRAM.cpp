@@ -1,5 +1,5 @@
 #include <iomanip>
-#include "NesRAM.h"
+#include "NesRam.h"
 
 namespace nesremu
 {

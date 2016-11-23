@@ -81,7 +81,7 @@ namespace nesremu
     {
         //Debugging.
         if (m_logEnabled) {
-            *m_logStream << "CPU: Loading..." << std::endl;
+            *m_logStream << "CPU:\t Loading..." << std::endl;
         }
 
         //Load the registers from the save stream.
@@ -107,7 +107,7 @@ namespace nesremu
     {
         //Debugging.
         if (m_logEnabled) {
-            *m_logStream << "CPU: Saving..." << std::endl;
+            *m_logStream << "CPU:\t Saving..." << std::endl;
         }
 
         //Write the registers to the save stream.

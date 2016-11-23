@@ -1,4 +1,4 @@
-#include "NesPPU.h"
+#include "NesPpu.h"
 
 namespace nesremu
 {
@@ -19,7 +19,7 @@ namespace nesremu
     {
         //Debugging.
         if (m_logEnabled) {
-            *m_logStream << "PPU: Loading..." << std::endl;
+            *m_logStream << "PPU:\t Loading..." << std::endl;
         }
     }
 
@@ -35,7 +35,7 @@ namespace nesremu
     {
         //Debugging.
         if (m_logEnabled) {
-            *m_logStream << "PPU: Saving..." << std::endl;
+            *m_logStream << "PPU:\t Saving..." << std::endl;
         }
     }
 

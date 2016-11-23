@@ -1,3 +1,7 @@
+//Author: Remi Pelletier
+//File:   NesBus.cpp
+//Desc.:  Definition of the NesBus methods.
+
 #include <algorithm>
 #include <iomanip>
 #include "NesBus.h"

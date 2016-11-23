@@ -1,3 +1,7 @@
+//Author: Remi Pelletier
+//File:   ILoggable.h
+//Desc.:  Declaration of the ILoggable interface.
+
 #pragma once
 #include <iostream>
 

@@ -15,18 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NesAPU.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NesCPU.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NesPPU.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NesROM.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="NesEmu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -36,29 +24,32 @@
     <ClInclude Include="NesBus.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="NesRAM.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="NesIOComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ILoggable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="NesPpuReg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NesCpu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NesRam.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NesPpu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NesApu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NesRom.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="NesCPU.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="NesPPU.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="NesAPU.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="NesROM.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -71,7 +62,22 @@
     <ClCompile Include="NesBus.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="NesRAM.cpp">
+    <ClCompile Include="NesApu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NesCpu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NesPpu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NesRam.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NesRom.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NesPpuReg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

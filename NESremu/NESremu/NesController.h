@@ -1,3 +1,8 @@
+//Author: Remi Pelletier
+//File:   NesController.h
+//Desc.:  Declaration of the NesController class used to 
+//        emulate a NES joypad.
+
 #pragma once
 #include <cstdint>
 #include "ILoggable.h"

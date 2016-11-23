@@ -1,15 +1,19 @@
+//Author: Remi Pelletier
+//File:   NesEmu.h
+//Desc.:  Declaration of the NesEmu class used to encapsulate
+//        the various emulated components.
+
 #pragma once
 #include <cstdint>
 #include <iostream>
-#include "NesAPU.h"
+#include "NesApu.h"
 #include "NesBus.h"
 #include "NesController.h"
-#include "NesCPU.h"
-#include "NesPPU.h"
-#include "NesRAM.h"
-#include "NesROM.h"
+#include "NesCpu.h"
+#include "NesPpu.h"
+#include "NesRam.h"
+#include "NesRom.h"
 
-//TO DO: Write emulator logic using the various components.
 
 namespace nesremu
 {
@@ -37,29 +41,34 @@ namespace nesremu
         static const uint16_t CPU_RAM_MASK     = 0x07FF;
         static const uint16_t ROM_ADDR         = 0x8000;
         static const uint16_t ROM_SIZE         = 0x8000;
+        static const uint16_t PPU_REG_ADDR     = 0x2000;
+        static const uint16_t PPU_REG_SIZE     = 0x2000;
+        static const uint16_t PPU_REG_MASK     = 0x2007;
+        static const uint16_t PPU_VRAM_ADDR    = 0x2000;
         static const uint32_t PPU_VRAM_SIZE    = 0x0800;
         static const uint16_t CONTROLLER1_ADDR = 0x4016;
         static const uint16_t CONTROLLER2_ADDR = 0x4017;
 
-        AddressFormatter NONE_ADDRESS_FORMATTER = [](uint16_t addr) -> uint16_t { return addr; };
+        AddressFormatter NONE_ADDR_FORMATTER     = [](uint16_t addr) -> uint16_t { return addr; };
+        AddressFormatter CPU_RAM_ADDR_FORMATTER  = [](uint16_t addr) -> uint16_t { return addr & CPU_RAM_MASK; };
+        AddressFormatter PPU_REG_ADDR_FORMATTER  = [](uint16_t addr) -> uint16_t { return addr & PPU_REG_MASK; };
+        AddressFormatter PPU_VRAM_ADDR_FORMATTER = [](uint16_t addr) -> uint16_t { return addr - PPU_VRAM_ADDR; };
+        AddressFormatter ROM_ADDR_FORMATTER      = [](uint16_t addr) -> uint16_t { return addr - ROM_ADDR; };
 
         //MappingCondition CPU_RAM_MAPPING_CONDITION = [](uint16_t addr) -> bool     { return addr < CPU_RAM_SIZE; };
-        AddressFormatter CPU_RAM_ADDRESS_FORMATTER = [](uint16_t addr) -> uint16_t { return addr & CPU_RAM_MASK; };
-
         //MappingCondition CONTROLLER1_MAPPING_CONDITION = [](uint16_t addr) -> bool { return addr == CONTROLLER1_ADDR; };
         //MappingCondition CONTROLLER2_MAPPING_CONDITION = [](uint16_t addr) -> bool { return addr == CONTROLLER2_ADDR; };
-
         //MappingCondition ROM_MAPPING_CONDITION = [](uint16_t addr) -> bool     { return addr >= ROM_ADDR; };
-        AddressFormatter ROM_ADDRESS_FORMATTER = [](uint16_t addr) -> uint16_t { return addr - ROM_ADDR; };
 
-
-        NesApu* m_apu  = nullptr;
-        NesBus* m_bus  = nullptr;
-        NesCpu* m_cpu  = nullptr;
-        NesPpu* m_ppu  = nullptr;
-        NesRam* m_ram  = nullptr;
-        NesRom* m_rom  = nullptr;
-        NesRam* m_vram = nullptr;
+        NesApu* m_apu    = nullptr;
+        NesCpu* m_cpu    = nullptr;
+        NesPpu* m_ppu    = nullptr;
+        NesRam* m_ram    = nullptr;
+        NesRom* m_rom    = nullptr;
+        NesRam* m_vram   = nullptr;
+        NesBus* m_apuBus = nullptr;
+        NesBus* m_cpuBus = nullptr;
+        NesBus* m_ppuBus = nullptr;
         NesController* m_controller1 = nullptr;
         NesController* m_controller2 = nullptr;
 

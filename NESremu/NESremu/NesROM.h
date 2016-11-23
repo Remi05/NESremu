@@ -1,3 +1,9 @@
+//Author: Remi Pelletier
+//File:   NesROM.h
+//Desc.:  Declaration of the NesRom class used to represent
+//        a NES ROM.
+
+
 #pragma once
 
 #include <cstdint>

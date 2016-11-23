@@ -1,3 +1,8 @@
+//Author: Remi Pelletier
+//File:   NesAPU.h
+//Desc.:  Declaration of the NesApu class used to emulate
+//        the NES APU.
+
 #pragma once
 #include <cstdint>
 #include "ILoggable.h"

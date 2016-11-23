@@ -1,3 +1,9 @@
+//Author: Remi Pelletier
+//File:   NesRAM.h
+//Desc.:  Declaration of the NesRam class used to emulate
+//        a bank of RAM.
+
+
 #pragma once
 #include <cstdint>
 #include <iostream>
