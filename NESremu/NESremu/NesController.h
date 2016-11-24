@@ -25,19 +25,11 @@ namespace nesremu
             BUTTON_RIGHT = 0x80
         };
 
-        //Debugging
-        bool m_logEnabled = false;
-        std::ostream* m_logStream = &std::clog;
-
 
     public:        
+        //IO
         virtual uint8_t read(uint16_t address);
         virtual void write(uint16_t address, uint8_t value);
-
-        //Debugging
-        virtual void enableLog()  { m_logEnabled = true;  }
-        virtual void disableLog() { m_logEnabled = false; }
-        virtual void setLogStream(std::ostream& logStream) { m_logStream = &logStream; }
 
     };
 }

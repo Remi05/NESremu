@@ -26,22 +26,6 @@ namespace nesremu
 
 
     //Core emulator functions
-    void NesEmu::load(std::istream& saveStream)
-    {
-        //Debugging.
-        if (m_logEnabled) {
-            *m_logStream << "Emu:\t Loading..." << std::endl;
-        }
-
-        if (m_state != NesEmuState::STOPPED) {
-            //m_apu->load(saveStream);
-            //m_cpu->load(saveStream);
-            //m_ppu->load(saveStream);
-            m_ram->load(saveStream);
-            //m_vram->load(saveStream);
-        }
-    }
-
     void NesEmu::reset()
     {
         //Debugging.
@@ -65,22 +49,6 @@ namespace nesremu
         }
     }
 
-    void NesEmu::save(std::ostream& saveStream)
-    {
-        //Debugging.
-        if (m_logEnabled) {
-            *m_logStream << "Emu:\t Saving..." << std::endl;
-        }
-
-        if (m_state != NesEmuState::STOPPED) {
-            //m_apu->save(saveStream);
-            //m_cpu->save(saveStream);
-            //m_ppu->save(saveStream);
-            m_ram->save(saveStream);
-            //m_vram->save(saveStream);
-        }
-    }
-
     void NesEmu::start(std::istream& romStream)
     {
         //Debugging.
@@ -88,7 +56,7 @@ namespace nesremu
             *m_logStream << "Emu:\t Starting..." << std::endl;
         }
 
-        //m_rom  = new NesRom(romFileName);
+        //m_rom = NesRom::load(romStream);
         m_ram  = new NesRam(CPU_RAM_SIZE);
         //m_vram = new NesRam(PPU_VRAM_SIZE);
         m_controller1 = new NesController();
@@ -145,6 +113,40 @@ namespace nesremu
         //delete m_ppuBus;
         delete m_controller1;
         delete m_controller2;
+    }
+
+
+    //Saving
+    void NesEmu::load(std::istream& saveStream)
+    {
+        //Debugging
+        if (m_logEnabled) {
+            *m_logStream << "Emu:\t Loading..." << std::endl;
+        }
+
+        if (m_state != NesEmuState::STOPPED) {
+            //m_apu->load(saveStream);
+            //m_cpu->load(saveStream);
+            //m_ppu->load(saveStream);
+            m_ram->load(saveStream);
+            //m_vram->load(saveStream);
+        }
+    }
+
+    void NesEmu::save(std::ostream& saveStream)
+    {
+        //Debugging
+        if (m_logEnabled) {
+            *m_logStream << "Emu:\t Saving..." << std::endl;
+        }
+
+        if (m_state != NesEmuState::STOPPED) {
+            //m_apu->save(saveStream);
+            //m_cpu->save(saveStream);
+            //m_ppu->save(saveStream);
+            m_ram->save(saveStream);
+            //m_vram->save(saveStream);
+        }
     }
 
 

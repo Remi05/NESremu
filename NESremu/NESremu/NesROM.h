@@ -56,23 +56,16 @@ namespace nesremu
         uint8_t* PrgRam = nullptr;
         uint8_t* VRam   = nullptr;
 
-        //Debugging
-        bool m_logEnabled = false;
-        std::ostream* m_logStream = &std::clog;
-
+        NesRom();
 
     public:
-        NesRom();
         ~NesRom();
 
-        void load(std::istream& romStream);
+        //IO
         virtual uint8_t read(uint16_t address);
         virtual void write(uint16_t address, uint8_t value);
 
-        //Debugging
-        virtual void enableLog()  { m_logEnabled = true;  }
-        virtual void disableLog() { m_logEnabled = false; }
-        virtual void setLogStream(std::ostream& logStream) { m_logStream = &logStream; }
+        static NesRom* load(std::istream& romStream);
 
     };
 

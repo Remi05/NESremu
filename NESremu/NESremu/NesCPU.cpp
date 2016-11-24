@@ -77,48 +77,12 @@ namespace nesremu
         return m_ticks;
     }
 
-    void NesCpu::load(std::istream& saveStream)
-    {
-        //Debugging.
-        if (m_logEnabled) {
-            *m_logStream << "CPU:\t Loading..." << std::endl;
-        }
-
-        //Load the registers from the save stream.
-        saveStream.read((char*)&PC, sizeof(PC));
-        saveStream.read((char*)&SP, sizeof(SP));
-        saveStream.read((char*)&A, sizeof(A));
-        saveStream.read((char*)&X, sizeof(X));
-        saveStream.read((char*)&Y, sizeof(Y));
-        saveStream.read((char*)&P, sizeof(P));
-        //Load the tick count from the save stream.
-        saveStream.read((char*)&m_ticks, sizeof(m_ticks));
-    }
-
     void NesCpu::reset()
     {
         //Debugging.
         if (m_logEnabled) {
             *m_logStream << "CPU:\t Resetting..." << std::endl;
         }
-    }
-
-    void NesCpu::save(std::ostream& saveStream)
-    {
-        //Debugging.
-        if (m_logEnabled) {
-            *m_logStream << "CPU:\t Saving..." << std::endl;
-        }
-
-        //Write the registers to the save stream.
-        saveStream.write((char*)&PC, sizeof(PC));
-        saveStream.write((char*)&SP, sizeof(SP));
-        saveStream.write((char*)&A, sizeof(A));
-        saveStream.write((char*)&X, sizeof(X));
-        saveStream.write((char*)&Y, sizeof(Y));
-        saveStream.write((char*)&P, sizeof(P));
-        //Write the tick count to the save stream.
-        saveStream.write((char*)&m_ticks, sizeof(m_ticks));
     }
 
     void NesCpu::start() 
@@ -157,6 +121,44 @@ namespace nesremu
                          << "SP: "  << SP << "  "
                          << "CYC: " << m_ticks << std::endl;
         }
+    }
+
+
+    //Saving
+    void NesCpu::load(std::istream& saveStream)
+    {
+        //Debugging.
+        if (m_logEnabled) {
+            *m_logStream << "CPU:\t Loading..." << std::endl;
+        }
+
+        //Load the registers from the save stream.
+        saveStream.read((char*)&PC, sizeof(PC));
+        saveStream.read((char*)&SP, sizeof(SP));
+        saveStream.read((char*)&A, sizeof(A));
+        saveStream.read((char*)&X, sizeof(X));
+        saveStream.read((char*)&Y, sizeof(Y));
+        saveStream.read((char*)&P, sizeof(P));
+        //Load the tick count from the save stream.
+        saveStream.read((char*)&m_ticks, sizeof(m_ticks));
+    }
+
+    void NesCpu::save(std::ostream& saveStream)
+    {
+        //Debugging.
+        if (m_logEnabled) {
+            *m_logStream << "CPU:\t Saving..." << std::endl;
+        }
+
+        //Write the registers to the save stream.
+        saveStream.write((char*)&PC, sizeof(PC));
+        saveStream.write((char*)&SP, sizeof(SP));
+        saveStream.write((char*)&A, sizeof(A));
+        saveStream.write((char*)&X, sizeof(X));
+        saveStream.write((char*)&Y, sizeof(Y));
+        saveStream.write((char*)&P, sizeof(P));
+        //Write the tick count to the save stream.
+        saveStream.write((char*)&m_ticks, sizeof(m_ticks));
     }
 
 

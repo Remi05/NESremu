@@ -6,12 +6,13 @@
 #pragma once
 #include <cstdint>
 #include "ILoggable.h"
+#include "ISerializable.h"
 #include "NesIOComponent.h"
 
 
 namespace nesremu
 {
-    class NesPpuReg : public NesIoComponent, public ILoggable
+    class NesPpuReg : public NesIoComponent, public ILoggable, public ISerializable
     {
     private:
         enum PpuRegisters {  PPUCTRL   = 0x2000,
@@ -38,22 +39,18 @@ namespace nesremu
         uint8_t  m_ppuscroll = 0;
         uint16_t m_ppuaddr   = 0;
 
-        //Debugging
-        bool m_logEnabled = false;
-        std::ostream* m_logStream = &std::clog;
-
 
     public:
         NesPpuReg();
         ~NesPpuReg();
 
-        //Core PPU registers functions
+        //IO
         virtual uint8_t read(uint16_t address);
         virtual void write(uint16_t address, uint8_t value);
 
-        //Debugging
-        virtual void enableLog()  { m_logEnabled = true;  }
-        virtual void disableLog() { m_logEnabled = false; }
-        virtual void setLogStream(std::ostream& logStream) { m_logStream = &logStream; }
+        //Saving
+        virtual void load(std::istream& saveStream);
+        virtual void save(std::ostream& saveStream);
+
     };
 }

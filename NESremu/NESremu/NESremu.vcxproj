@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ILoggable.h" />
+    <ClInclude Include="ISerializable.h" />
     <ClInclude Include="NesApu.h" />
     <ClInclude Include="NesBus.h" />
     <ClInclude Include="NesController.h" />

@@ -7,11 +7,12 @@
 #pragma once
 #include <cstdint>
 #include "ILoggable.h"
+#include "ISerializable.h"
 #include "NesBus.h"
 
 namespace nesremu
 {
-    class NesPpu : public ILoggable
+    class NesPpu : public ILoggable, public ISerializable
     {
     private:
         ////PPU 16KiB memory bank (16384 bytes)
@@ -34,10 +35,6 @@ namespace nesremu
         NesBus*  m_bus   = nullptr;
         uint32_t m_ticks = 0;
 
-        //Debugging
-        bool m_logEnabled = false;
-        std::ostream* m_logStream = &std::clog;
-
 
     public:
         NesPpu(NesBus* bus);
@@ -45,17 +42,14 @@ namespace nesremu
 
         //Core PPU functions.
         uint32_t getTicks();
-        void load(std::istream& saveStream);
         void reset();
-        void save(std::ostream& saveStream);
         void start();
         void stop();
         void tick();
 
-        //Debugging
-        virtual void enableLog()  { m_logEnabled = true;  }
-        virtual void disableLog() { m_logEnabled = false; }
-        virtual void setLogStream(std::ostream& logStream) { m_logStream = &logStream; }
+        //Saving
+        virtual void load(std::istream& saveStream);
+        virtual void save(std::ostream& saveStream);
 
     };
 }

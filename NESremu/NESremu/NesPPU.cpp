@@ -15,27 +15,11 @@ namespace nesremu
         return m_ticks;
     }
 
-    void NesPpu::load(std::istream& saveStream)
-    {
-        //Debugging.
-        if (m_logEnabled) {
-            *m_logStream << "PPU:\t Loading..." << std::endl;
-        }
-    }
-
     void NesPpu::reset()
     {
         //Debugging.
         if (m_logEnabled) {
             *m_logStream << "PPU:\t Resetting..." << std::endl;
-        }
-    }
-
-    void NesPpu::save(std::ostream& saveStream)
-    {
-        //Debugging.
-        if (m_logEnabled) {
-            *m_logStream << "PPU:\t Saving..." << std::endl;
         }
     }
 
@@ -56,5 +40,23 @@ namespace nesremu
     }
 
     void NesPpu::tick() {}
+
+
+    //Saving
+    void NesPpu::load(std::istream& saveStream)
+    {
+        //Debugging.
+        if (m_logEnabled) {
+            *m_logStream << "PPU:\t Loading..." << std::endl;
+        }
+    }
+
+    void NesPpu::save(std::ostream& saveStream)
+    {
+        //Debugging.
+        if (m_logEnabled) {
+            *m_logStream << "PPU:\t Saving..." << std::endl;
+        }
+    }
 
 }

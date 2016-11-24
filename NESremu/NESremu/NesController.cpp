@@ -2,6 +2,7 @@
 
 namespace nesremu 
 {
+    //IO
     uint8_t NesController::read(uint16_t address)
     {
         //Debugging.

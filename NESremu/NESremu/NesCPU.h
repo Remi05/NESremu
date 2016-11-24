@@ -7,6 +7,7 @@
 #pragma once
 #include <cstdint>
 #include <iostream>
+#include "ISerializable.h"
 #include "NesBus.h"
 
 
@@ -22,7 +23,7 @@ namespace nesremu
 
 
 
-    class NesCpu : public ILoggable
+    class NesCpu : public ILoggable, public ISerializable
     {
     private:
         using AddressingMode = uint16_t(NesCpu::*)();
@@ -91,10 +92,6 @@ namespace nesremu
         //Ticks
         uint32_t m_ticks = 0;
         uint32_t m_tickOffset = 0;
-
-        //Debug
-        bool m_logEnabled = false;
-        std::ostream* m_logStream = &std::clog;
 
 
         //Flags related functions
@@ -217,16 +214,13 @@ namespace nesremu
 
         //Core CPU functions
         uint32_t getTicks();
-        void load(std::istream& saveStream);
         void reset();
-        void save(std::ostream& saveStream);
         void start();
         void stop();
         void tick();
 
-        //Debugging
-        virtual void enableLog()  { m_logEnabled = true;  }
-        virtual void disableLog() { m_logEnabled = false; }
-        virtual void setLogStream(std::ostream& logStream) { m_logStream = &logStream; }
+        //Saving
+        virtual void load(std::istream& saveStream);
+        virtual void save(std::ostream& saveStream);
     };
 }

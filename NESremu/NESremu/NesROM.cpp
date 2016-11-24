@@ -3,16 +3,13 @@
 
 namespace nesremu
 {
+    //Constructor and destructor
     NesRom::NesRom() { }
 
     NesRom::~NesRom() { }
 
 
-    void NesRom::load(std::istream& romStream)
-    {
-
-    }
-
+    //IO
     uint8_t NesRom::read(uint16_t address)
     {
         return 0;
@@ -21,6 +18,12 @@ namespace nesremu
     void NesRom::write(uint16_t address, uint8_t value)
     {
 
+    }
+
+
+    NesRom* NesRom::load(std::istream& romStream)
+    {
+        return new NesRom();
     }
 
 }

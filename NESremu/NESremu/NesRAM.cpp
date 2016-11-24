@@ -16,24 +16,6 @@ namespace nesremu
     }
 
 
-    //Saving
-    void NesRam::load(std::istream& saveStream)
-    {
-        //Read the length of the data from the save stream.
-        saveStream.read((char*)&m_size, sizeof(m_size));
-        //Read the data from the save stream.
-        saveStream.read((char*)m_memory, m_size);
-    }
-
-    void NesRam::save(std::ostream& saveStream)
-    {
-        //Write the length of the data to the save stream.
-        saveStream.write((char*)&m_size, sizeof(m_size));
-        //Write the data to the save stream.
-        saveStream.write((char*)m_memory, m_size);
-    }
-
-
     //Core RAM functions.
     uint8_t NesRam::read(uint16_t address)
     {
@@ -78,6 +60,24 @@ namespace nesremu
 
         //Write the given value.
         m_memory[address] = value;
+    }
+
+
+    //Saving
+    void NesRam::load(std::istream& saveStream)
+    {
+        //Read the length of the data from the save stream.
+        saveStream.read((char*)&m_size, sizeof(m_size));
+        //Read the data from the save stream.
+        saveStream.read((char*)m_memory, m_size);
+    }
+
+    void NesRam::save(std::ostream& saveStream)
+    {
+        //Write the length of the data to the save stream.
+        saveStream.write((char*)&m_size, sizeof(m_size));
+        //Write the data to the save stream.
+        saveStream.write((char*)m_memory, m_size);
     }
 
 }
