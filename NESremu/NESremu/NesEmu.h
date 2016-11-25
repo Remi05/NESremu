@@ -11,6 +11,7 @@
 #include "NesController.h"
 #include "NesCpu.h"
 #include "NesPpu.h"
+#include "NesPpuReg.h"
 #include "NesRam.h"
 #include "NesRom.h"
 
@@ -69,6 +70,7 @@ namespace nesremu
         NesBus* m_apuBus = nullptr;
         NesBus* m_cpuBus = nullptr;
         NesBus* m_ppuBus = nullptr;
+        NesPpuReg* m_ppuReg = nullptr;
         NesController* m_controller1 = nullptr;
         NesController* m_controller2 = nullptr;
 
@@ -85,12 +87,14 @@ namespace nesremu
         ~NesEmu();
 
         //Core emulator functions
-        void load(std::istream& saveStream);
         void reset();
         void run();
-        void save(std::ostream& saveStream);
         void start(std::istream& romStream);
         void stop();
+
+        //Saving
+        void load(std::istream& saveStream);
+        void save(std::ostream& saveStream);
 
         //Debugging
         virtual void enableLog(uint16_t flags = LogFlags::LOG_ALL);

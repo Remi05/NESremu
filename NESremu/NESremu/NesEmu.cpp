@@ -59,6 +59,7 @@ namespace nesremu
         //m_rom = NesRom::load(romStream);
         m_ram  = new NesRam(CPU_RAM_SIZE);
         //m_vram = new NesRam(PPU_VRAM_SIZE);
+        //m_ppuReg = new NesPpuReg();
         m_controller1 = new NesController();
         m_controller2 = new NesController();
 
@@ -67,9 +68,11 @@ namespace nesremu
         m_cpuBus->map(m_ram, CPU_RAM_ADDR, CPU_RAM_SIZE, CPU_RAM_ADDR_FORMATTER, MAP_RW);
         m_cpuBus->map(m_controller1, CONTROLLER1_ADDR, 1, NONE_ADDR_FORMATTER, MAP_RW);
         m_cpuBus->map(m_controller2, CONTROLLER2_ADDR, 1, NONE_ADDR_FORMATTER, MAP_READ); //Writes to 0x4017 go to the APU.
-        
+        //m_cpuBus->map(m_ppuReg, PPU_REG_ADDR, PPU_REG_SIZE, PPU_REG_ADDR_FORMATTER, MAP_RW);
+
         //m_ppuBus = new NesBus();
         //m_ppuBus->map(m_vram, PPU_VRAM_ADDR, PPU_VRAM_SIZE, PPU_VRAM_ADDR_FORMATTER, MAP_RW);
+        //m_ppuBus->map(m_ppuReg, PPU_REG_ADDR, PPU_REG_SIZE, PPU_REG_ADDR_FORMATTER, MAP_RW);
 
         //m_apu = new NesApu(m_apuBus);
         //m_cpu = new NesCpu(m_cpuBus);
