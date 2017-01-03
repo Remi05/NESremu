@@ -56,10 +56,10 @@ namespace nesremu
         AddressFormatter PPU_VRAM_ADDR_FORMATTER = [](uint16_t addr) -> uint16_t { return addr - PPU_VRAM_ADDR; };
         AddressFormatter ROM_ADDR_FORMATTER      = [](uint16_t addr) -> uint16_t { return addr - ROM_ADDR; };
 
-        //MappingCondition CPU_RAM_MAPPING_CONDITION = [](uint16_t addr) -> bool     { return addr < CPU_RAM_SIZE; };
+        //MappingCondition CPU_RAM_MAPPING_CONDITION     = [](uint16_t addr) -> bool { return addr < CPU_RAM_SIZE; };
         //MappingCondition CONTROLLER1_MAPPING_CONDITION = [](uint16_t addr) -> bool { return addr == CONTROLLER1_ADDR; };
         //MappingCondition CONTROLLER2_MAPPING_CONDITION = [](uint16_t addr) -> bool { return addr == CONTROLLER2_ADDR; };
-        //MappingCondition ROM_MAPPING_CONDITION = [](uint16_t addr) -> bool     { return addr >= ROM_ADDR; };
+        //MappingCondition ROM_MAPPING_CONDITION         = [](uint16_t addr) -> bool { return addr >= ROM_ADDR; };
 
         NesApu* m_apu    = nullptr;
         NesCpu* m_cpu    = nullptr;
